@@ -37,13 +37,13 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 1. **Clone o repositório:**
 
 ```bash
- git clone https://github.com/seuusuario/garcom-virtual.git
+ git clone [https://github.com/lucas-viana/APIAutoAtendimento.git]
  cd garcom-virtual
 ```
 
 2. **Configure o banco de dados:**
 
-- Crie um banco de dados no SQL Server.
+- Crie um banco de dados no My SQL.
 - Atualize a string de conexão no arquivo `appsettings.json`.
 
 3. **Restaure as dependências:**
