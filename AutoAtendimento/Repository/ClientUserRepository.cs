@@ -28,7 +28,12 @@ namespace AutoAtendimento.Repository
 
         public async Task<ClientUser> UpdateAsync(ClientUser entity)
         {
-            _context.ClientUser.Update(entity);
+            var selectEntity = await GetByIdAsync(entity.Id);
+            if (selectEntity is null)
+            {
+                return null;
+            }
+            _context.ClientUser.Update(selectEntity);
             return entity;
         }
 

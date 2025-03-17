@@ -1,6 +1,8 @@
-﻿namespace AutoAtendimento.Models
+﻿using AutoAtendimento.Models.Interfaces;
+
+namespace AutoAtendimento.Models
 {
-    public class Stock
+    public class Stock : IEntity
     {
         public int Id { get; set; }
         public DateTime LastModified { get; set; }

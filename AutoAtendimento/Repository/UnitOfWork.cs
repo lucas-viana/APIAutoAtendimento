@@ -8,6 +8,7 @@ namespace AutoAtendimento.Repository
     {
         private IProductRepository _productRepository;
         private IRepository<Category> _categoryRepository;
+        private IRepository<ClientUser> _clientUserRepository;
         public AppDbContext _unitOfWork;
 
         public UnitOfWork(AppDbContext context)
@@ -31,6 +32,13 @@ namespace AutoAtendimento.Repository
             }
         }
 
+        public IRepository<ClientUser> ClientUserRepository
+        {
+            get
+            {
+                return _clientUserRepository = _clientUserRepository ?? new Repository<ClientUser>(_unitOfWork);
+            }
+        }
 
         public async Task CommitAsync()
         {

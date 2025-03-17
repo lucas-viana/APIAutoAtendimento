@@ -1,11 +1,12 @@
 ﻿using AutoAtendimento.Models.Enum;
+using AutoAtendimento.Models.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoAtendimento.Models
 {
     [Table("Order")]
-    public class Order
+    public class Order : IEntity
     {
         [Key]
         public int Id { get; set; }

@@ -6,7 +6,8 @@ namespace AutoAtendimento.Repository.Interfaces
     {
         IProductRepository ProductRepository { get; }
         IRepository<Category> CategoryRepository { get; }
-        
+        IRepository<ClientUser> ClientUserRepository { get; }
+
         Task CommitAsync();
     }
 }

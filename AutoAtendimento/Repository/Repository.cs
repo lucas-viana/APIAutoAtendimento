@@ -43,12 +43,13 @@ namespace AutoAtendimento.Repository
 
         public async Task<T> UpdateAsync(T entity)
         {
-            if(entity is null)
+            var selectEntity = await GetByIdAsync(entity.Id);
+            if (entity is null)
             {
                 return null;
             }
 
-            _context.Set<T>().Update(entity);
+            _context.Set<T>().Update(selectEntity);
             return entity;
         }
 
