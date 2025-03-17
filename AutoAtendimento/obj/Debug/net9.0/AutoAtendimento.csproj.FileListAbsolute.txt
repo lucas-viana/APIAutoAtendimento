@@ -107,3 +107,4 @@ C:\Users\Lucas Viana\source\repos\AutoAtendimento\AutoAtendimento\obj\Debug\net9
 C:\Users\Lucas Viana\source\repos\AutoAtendimento\AutoAtendimento\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Lucas Viana\source\repos\AutoAtendimento\AutoAtendimento\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Lucas Viana\source\repos\AutoAtendimento\AutoAtendimento\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Lucas Viana\source\repos\AutoAtendimento\AutoAtendimento\obj\Debug\net9.0\AutoAtendimento.sourcelink.json

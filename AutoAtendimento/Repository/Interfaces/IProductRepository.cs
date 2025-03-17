@@ -5,6 +5,6 @@ namespace AutoAtendimento.Repository.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {
-        public Task<IEnumerable> GetProductsByCategory(int idCategory);
+        public Task<IEnumerable> GetProductsByCategoryAsync(int idCategory);
     }
 }

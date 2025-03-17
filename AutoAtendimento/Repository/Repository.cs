@@ -1,11 +1,12 @@
 ﻿using AutoAtendimento.Context;
+using AutoAtendimento.Models.Interfaces;
 using AutoAtendimento.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace AutoAtendimento.Repository
 {
-    public class Repository<T>(AppDbContext context) : IRepository<T> where T : class
+    public class Repository<T>(AppDbContext context) : IRepository<T> where T : class, IEntity
     {
         protected readonly AppDbContext _context = context;
 
@@ -14,9 +15,9 @@ namespace AutoAtendimento.Repository
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetByIdAsync(int id) 
         {
-            return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate);
+            return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public T Create(T entity)
@@ -26,30 +27,30 @@ namespace AutoAtendimento.Repository
                 throw new ArgumentNullException(nameof(entity));
             }
             _context.Set<T>().Add(entity);
-            _context.SaveChanges();
             return entity;
         }
 
-        public T Delete(T entity)
+        public async Task<T> DeleteAsync(int id)
         {
-            if(entity is null)
+            var entity = await GetByIdAsync(id);
+            if (entity is null)
             {
-                throw new ArgumentNullException(nameof(entity));
+                return null;
             }
             _context.Set<T>().Remove(entity);
-            _context.SaveChanges();
             return entity;
         }
 
-        public T Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             if(entity is null)
             {
-                throw new ArgumentNullException(nameof(entity));
+                return null;
             }
 
             _context.Set<T>().Update(entity);
             return entity;
         }
+
     }
 }

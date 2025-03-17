@@ -6,7 +6,7 @@ namespace AutoAtendimento.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private IProductRepository? _productRepository;
+        private IProductRepository _productRepository;
         private IRepository<Category> _categoryRepository;
         public AppDbContext _unitOfWork;
 

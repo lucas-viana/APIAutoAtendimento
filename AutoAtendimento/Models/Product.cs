@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoAtendimento.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace AutoAtendimento.Models
 {
     [Table("Product")]
-    public class Product
+    public class Product : IEntity
     {
         [Key]
         public int Id { get; set; }
@@ -15,15 +16,7 @@ namespace AutoAtendimento.Models
         public string Name { get; set; }
 
         [Required]
-        public decimal CostPrice { get; set; }
-
-        [Required]
         public decimal SalePrice { get; set; }
-
-        [StringLength(maximumLength: 400, ErrorMessage = "Enter a value with a maximum of 400 characters.")]
-        public string Description { get; set; }
-
-
 
         [Required]
         [ForeignKey("Category")]

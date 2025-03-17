@@ -7,17 +7,20 @@ namespace AutoAtendimento.Models
     public class OrderItem
     {
         [Key]
-        public int OrderItemId { get; set; }
+        public int Id { get; set; }
         [Required]
         public Product Product { get; set; }
         public int ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
-        [ForeignKey("Order")]
+        public Order Order { get; set; }
         public int OrderId { get; set; }
-        public decimal PriceAtOrder { get; set; }
+        public decimal PriceAtOrder { get; private set; } = decimal.Zero;
 
+        public OrderItem()
+        {
+        }
         public OrderItem(Product product, int quantity)
         {
             if (product == null)
@@ -34,7 +37,8 @@ namespace AutoAtendimento.Models
 
         public decimal CalculateTotal()
         {
-            return Quantity * Product.Price;
+            PriceAtOrder = Quantity * Product.SalePrice;
+            return PriceAtOrder;
         }
     }
 }

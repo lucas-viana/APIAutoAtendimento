@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoAtendimento.Models
 {
-    [Table("Client")]
-    public class Client
+    [Table("ClientUser")]
+    public class ClientUser
     {
         [Key]
-        public int ClientId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(maximumLength: 60, MinimumLength = 10, ErrorMessage = "Enter a value with a maximum of 60 characters and minimum 10")]

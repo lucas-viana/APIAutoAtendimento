@@ -7,23 +7,19 @@ using System.Linq.Expressions;
 
 namespace AutoAtendimento.Repository
 {
-    public class ProductRepository(AppDbContext context) : Repository<Product>(context) , IProductRepository 
+    public class ProductRepository(AppDbContext context) : Repository<Product>(context), IProductRepository
     {
-        public Product Create(Product entity)
+        public Product Create(Product product)
         {
-            ArgumentNullException.ThrowIfNull(entity);
-            _context.Add(entity);
-            return entity;
+            _context.Add(product);
+            return product;
         }
 
-        public Product Delete(Product entity)
+        public async Task<Product> DeleteAsync(Product product)
         {
-            if (entity is null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            _context.Set<Product>().Remove(entity);
-            return entity;
+            var selectProduct = await GetByIdAsync(product.Id);
+            _context.Set<Product>().Remove(product);
+            return product;
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()
@@ -31,25 +27,27 @@ namespace AutoAtendimento.Repository
             return await _context.Set<Product>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<Product> GetAsync(Expression<Func<Product, bool>> predicate)
+        public async Task<Product> GetAsync(Product product)
         {
-            return await _context.Set<Product>().AsNoTracking().FirstOrDefaultAsync(predicate);
+            return await _context.Set<Product>().AsNoTracking().FirstOrDefaultAsync(p => p.Id == product.Id);
         }
 
-        public Product Update(Product entity)
+        public async Task<Product> UpdateAsync(Product product)
         {
-            if (entity is null)
+            var selectProduct = await GetByIdAsync(product.Id);
+
+            if (selectProduct is null)
             {
-                throw new ArgumentNullException(nameof(entity));
+                return null;
             }
 
-            _context.Update(entity);
-            return entity;
+            _context.Update(selectProduct);
+            return product;
         }
 
-        public async Task<IEnumerable> GetProductsByCategory(int idCategory)
+        public async Task<IEnumerable> GetProductsByCategoryAsync(int idCategory)
         {
-            var products = await _context.Products.Where(p => p.CategoryId == idCategory).ToListAsync();
+            var products = await _context.Product.Where(p => p.CategoryId == idCategory).ToListAsync();
             return products;
         }
     }

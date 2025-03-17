@@ -2,21 +2,30 @@
 {
     public class Stock
     {
-        public int StockId { get; set; }
-        private List<StockItem> StockItems { get; set; } = [];
+        public int Id { get; set; }
+        public DateTime LastModified { get; set; }
+        private List<StockItem> _stockItems = [];
+        public IReadOnlyList<StockItem> StockItems => _stockItems;
+
+        public Stock()
+        {
+            LastModified = DateTime.Now;
+        }
 
         public void AddStockItem(StockItem stockItem)
         {
-            StockItems.Add(stockItem);
+            _stockItems.Add(stockItem);
+            LastModified = DateTime.Now;
         }
         public void RemoveStockItem(StockItem stockItem)
         {
-            StockItems.Remove(stockItem);
+            _stockItems.Remove(stockItem);
+            LastModified = DateTime.Now;
         }
 
         public void UpdateStockItem(StockItem stockItem)
         {
-            StockItems[StockItems.IndexOf(stockItem)] = stockItem;
+            _stockItems[stockItem.Id] = stockItem;
         }
     }
 }

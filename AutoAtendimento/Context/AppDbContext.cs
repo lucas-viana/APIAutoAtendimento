@@ -5,10 +5,18 @@ namespace AutoAtendimento.Context
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Table> Tables { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<ClientUser> ClientUser { get; set; }
+        public DbSet<Table> Table { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+        public DbSet<StockItem> StockItem { get; set; }
+        public DbSet<Stock> Stock { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
     }
 }

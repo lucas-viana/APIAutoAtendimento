@@ -30,7 +30,7 @@ namespace AutoAtendimento.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
-            var product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
 
             if (product is null)
             {
@@ -57,12 +57,12 @@ namespace AutoAtendimento.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Product>> Put(int id, [FromBody] Product product)
         {
-            var productUpdate = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+            var productUpdate = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if(product is null || productUpdate is null)
             {
                 return BadRequest("Incosistent data");
             }
-            _unitOfWork.ProductRepository.Update(product);
+            await _unitOfWork.ProductRepository.UpdateAsync(product);
             await _unitOfWork.CommitAsync();
             return Ok(product);
         }
@@ -71,14 +71,14 @@ namespace AutoAtendimento.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> Delete(int id)
         {
-            var product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
 
             if (product is null)
             {
                 return NotFound("Product not found...");
             }
 
-            _unitOfWork.ProductRepository.Delete(product);
+            await _unitOfWork.ProductRepository.DeleteAsync(product.Id);
             await _unitOfWork.CommitAsync();
             return Ok(product);
         }
